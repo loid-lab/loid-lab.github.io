@@ -1,33 +1,49 @@
-const words = ['loid-lab 👾', 'Code. Coffee. Chaos.'];
-let i = 0;
-let j = 0;
-let currentWord = '';
+const typewriterEl = document.getElementById('typewriter');
+
+const baseText = "loid-lab 👾";
+const words = ["Code", "Coffee", "Chaos"];
+const typingSpeed = 120;
+const erasingSpeed = 70;
+const delayBetween = 1500;
+
+let wordIndex = 0;
+let charIndex = 0;
 let isDeleting = false;
-const el = document.getElementById('typewriter');
+let isBaseDone = false;
 
 function type() {
-  if (i < words.length) {
-    if (!isDeleting && j <= words[i].length) {
-      currentWord = words[i].substring(0, j++);
-      el.textContent = currentWord;
-    } else if (isDeleting && j >= 0) {
-      currentWord = words[i].substring(0, j--);
-      el.textContent = currentWord;
-    }
-
-    if (!isDeleting && j === words[i].length) {
-      isDeleting = true;
-      setTimeout(type, 1000);
-      return;
-    } else if (isDeleting && j === 0) {
-      isDeleting = false;
-      i++;
+  if (!isBaseDone) {
+    // Type base text once
+    if (charIndex < baseText.length) {
+      typewriterEl.textContent += baseText.charAt(charIndex);
+      charIndex++;
+      setTimeout(type, typingSpeed);
+    } else {
+      isBaseDone = true;
+      setTimeout(type, delayBetween);
+      charIndex = 0;
     }
   } else {
-    i = 0;
+    const currentWord = words[wordIndex];
+    if (!isDeleting && charIndex <= currentWord.length) {
+      // Typing word
+      typewriterEl.textContent = baseText + " " + currentWord.substring(0, charIndex);
+      charIndex++;
+      setTimeout(type, typingSpeed);
+    } else if (isDeleting && charIndex >= 0) {
+      // Deleting word
+      typewriterEl.textContent = baseText + " " + currentWord.substring(0, charIndex);
+      charIndex--;
+      setTimeout(type, erasingSpeed);
+    } else {
+      // Switch typing/deleting
+      isDeleting = !isDeleting;
+      if (!isDeleting) {
+        wordIndex = (wordIndex + 1) % words.length;
+      }
+      setTimeout(type, delayBetween);
+    }
   }
-
-  setTimeout(type, isDeleting ? 40 : 70);
 }
 
 type();
