@@ -1,95 +1,86 @@
-/* Base styles */
+/* Reset & basics */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #fff;
-  color: #222;
   margin: 0;
-  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9f9f9;
+  color: #333;
   transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container {
   max-width: 700px;
-  margin: 0 auto;
+  padding: 20px;
+  flex: 1;
+  width: 100%;
 }
 
-.title {
+h1.title {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 0.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  margin-bottom: 0.5em;
+  user-select: none;
 }
 
 .cursor {
-  font-weight: 700;
-  font-size: 2.5rem;
-  color: #007acc;
+  display: inline-block;
   animation: blink 1s step-start infinite;
 }
 
 @keyframes blink {
-  50% {
-    opacity: 0;
-  }
+  50% { opacity: 0; }
 }
 
-.stack {
-  font-size: 1.1rem;
-  color: #555;
+/* Projects */
+.projects {
+  display: grid;
+  gap: 1.2rem;
   margin-bottom: 2rem;
 }
 
-section {
-  margin-bottom: 3rem;
-}
-
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #007acc;
-  padding-bottom: 0.3rem;
-  color: #007acc;
-}
-
-.projects {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
 .project a {
-  text-decoration: none;
-  color: #222;
   font-weight: 600;
-  font-size: 1.2rem;
-}
-
-.project a:hover {
-  color: #007acc;
-  text-decoration: underline;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #1a73e8;
 }
 
 .project p {
-  margin: 0.25rem 0 0;
-  color: #444;
-  font-size: 1rem;
-}
-
-.terminal {
-  background-color: #222;
-  color: #eee;
-  padding: 1rem;
-  font-family: 'Courier New', Courier, monospace;
-  border-radius: 5px;
-  overflow-x: auto;
+  margin: 0.2rem 0 1rem 0;
   font-size: 0.9rem;
+  color: #555;
 }
 
+/* Stack */
+.stack {
+  font-style: italic;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+/* Terminal */
+.terminal {
+  background: #222;
+  color: #eee;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-family: 'Source Code Pro', monospace, monospace;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  max-width: 100%;
+  white-space: pre-wrap;
+  margin-top: 0;
+}
+
+/* Links */
 .links {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
 }
 
 .links li {
@@ -97,62 +88,58 @@ h2 {
 }
 
 .links a {
-  color: #007acc;
+  color: #1a73e8;
   text-decoration: none;
+  font-weight: 600;
 }
 
-.links a:hover {
-  text-decoration: underline;
+.links p {
+  margin: 0.2rem 0 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
-p strong {
-  color: #007acc;
-}
+/* Dark Mode */
 
-/* Dark mode styles */
 body.dark {
   background: #121212;
-  color: #ddd;
-}
-
-body.dark .title {
-  color: #90caf9;
-}
-
-body.dark .cursor {
-  color: #90caf9;
-}
-
-body.dark .stack {
-  color: #bbb;
-}
-
-body.dark h2 {
-  color: #90caf9;
-  border-color: #90caf9;
-}
-
-body.dark .project a {
-  color: #ddd;
-}
-
-body.dark .project a:hover {
-  color: #90caf9;
-}
-
-body.dark .project p {
-  color: #ccc;
-}
-
-body.dark .terminal {
-  background-color: #333;
   color: #eee;
 }
 
-body.dark .links a {
-  color: #90caf9;
+body.dark .stack {
+  color: #aaa;
 }
 
-body.dark p strong {
-  color: #90caf9;
+body.dark .project a,
+body.dark .links a {
+  color: #82aaff;
+}
+
+body.dark .terminal {
+  background: #333;
+  color: #ddd;
+}
+
+/* Dark Mode Toggle Button */
+#darkModeToggle {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  z-index: 1000;
+  user-select: none;
+  color: #666;
+}
+
+#darkModeToggle:hover {
+  transform: scale(1.2);
+  color: #1a73e8;
+}
+
+body.dark #darkModeToggle {
+  color: #eee;
 }

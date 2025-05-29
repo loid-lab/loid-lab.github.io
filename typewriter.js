@@ -36,10 +36,16 @@ function type() {
       charIndex--;
       setTimeout(type, erasingSpeed);
     } else {
-      // Switch typing/deleting
-      isDeleting = !isDeleting;
-      if (!isDeleting) {
+      // Switch typing/deleting phase
+      if (isDeleting) {
+        // Finished deleting, move to next word
         wordIndex = (wordIndex + 1) % words.length;
+        isDeleting = false;
+        charIndex = 0;
+      } else {
+        // Finished typing, start deleting
+        isDeleting = true;
+        charIndex--;
       }
       setTimeout(type, delayBetween);
     }
