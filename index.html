@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loid Lab 👾</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -23,12 +23,20 @@
           <a href="https://github.com/loid-lab/poke-gen" target="_blank">🧬 <strong>Poke-Gen</strong></a>
           <p>A Pokémon generator. Built for fun, optimized for flavor.</p>
           <p><strong>Live demo:</strong></p>
-          <iframe 
-            src="https://poke-gen-lemon.vercel.app/" 
-            title="Poke-Gen Live Demo"
-            loading="lazy"
-            sandbox="allow-scripts allow-same-origin allow-forms"
-          ></iframe>
+          <div class="live-demo-wrapper">
+            <iframe
+              id="pokeGenIframe"
+              class="live-demo-iframe"
+              src="https://poke-gen-lemon.vercel.app/"
+              title="Poke-Gen Live Demo"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms"
+            ></iframe>
+            <div class="demo-controls">
+              <button id="fullscreenToggle" aria-label="Toggle Fullscreen">🔲</button>
+              <button id="openModal" aria-label="Open Demo Modal">🔍</button>
+            </div>
+          </div>
         </div>
 
         <div class="project">
@@ -36,10 +44,10 @@
           <p>A minimal blockchain written in Go with Proof-of-Work and CLI interaction.</p>
           <p><strong>CLI Commands:</strong></p>
           <ul>
-            <li><code>go run main.go addblock -data="Send 1 BTC to Ivan"</code> — add a block</li>
-            <li><code>go run main.go createwallet</code> — create a wallet</li>
-            <li><code>go run main.go miningreward</code> — create mining reward tx</li>
-            <li><code>go run main.go printchain</code> — print blockchain</li>
+            <li><code>go run main.go addblock -data="Send 1 BTC to Ivan"</code></li>
+            <li><code>go run main.go createwallet</code></li>
+            <li><code>go run main.go miningreward</code></li>
+            <li><code>go run main.go printchain</code></li>
           </ul>
           <details>
             <summary>Sample output from <code>printchain</code></summary>
@@ -80,7 +88,14 @@ $ cat stats.txt
     </section>
   </main>
 
+  <!-- Modal -->
+  <div id="demoModal" class="modal" aria-hidden="true">
+    <span id="closeModal" class="close" aria-label="Close Demo Modal">&times;</span>
+    <iframe id="modalIframe" src="" title="Project Demo" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+  </div>
+
   <script src="typewriter.js"></script>
   <script src="darkmode.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
